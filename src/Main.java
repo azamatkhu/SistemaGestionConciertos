@@ -83,7 +83,7 @@ public class Main {
         try {
             switch (opcion) {
                 case 1:
-                    System.out.println("Escribe el id del artista: ");
+                    System.out.println("Escribe el nombre del artista: ");
                     String nombre = sc.nextLine();
 
                     System.out.println("Escribe el genero musical del artista: ");
