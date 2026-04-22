@@ -9,11 +9,14 @@ public class Main {
         int seccion = -1;
         int opcion = -1;
 
+        // Conexion a base de datos
         try (Connection connection = DriverManager.getConnection(
                 "jdbc:oracle:thin:@localhost:1521:xe",
                 "RIBERA",
                 "ribera"
         )) {
+            // Manejo del menu en un bucle while
+            // Tenemos aqui un menu con secciones, osea podemos hacer operacion con Artista, Concierto y Entradas
             while(seccion != 0){
                 System.out.println("Conectado!");
 
@@ -28,6 +31,7 @@ public class Main {
                 seccion = sc.nextInt();
                 sc.nextLine();
 
+                // Cada seccion contiene operacion con tabla, como añadir, eliminar y listar los datos
                 switch(seccion){
                     case 1:
                         System.out.println("1. Añadir artista");
@@ -77,6 +81,7 @@ public class Main {
             throw new RuntimeException(e);
         }
     }
+    // El metodo para manejar con Artista
     public static void ManejarArtista(Scanner sc, int opcion, Connection con){
         List<Artista> lista = new ArrayList<>();
 
@@ -93,11 +98,13 @@ public class Main {
                     String paisOrigen = sc.nextLine();
 
                     int idNuevo = 1;
-
+                    
+                    // Sacamos la cantidad de artistas
                     String sqlContarID = "SELECT COUNT(*) FROM ARTISTA";
                     Statement st = con.createStatement();
                     ResultSet rs = st.executeQuery(sqlContarID);
 
+                    // Un ResultSet para asignar ID
                     if (rs.next()) {
                         idNuevo += rs.getInt(1);
                     }
@@ -105,6 +112,7 @@ public class Main {
                     Artista artista = new Artista(idNuevo,  nombre, generoMusical, paisOrigen);
                     String sqlInsertarArtista = "INSERT INTO ARTISTA VALUES (?, ?, ?, ?)";
 
+                    // Un preparedStatement para insertar Artista
                     PreparedStatement ps = con.prepareStatement(sqlInsertarArtista);
                     ps.setInt(1, artista.getId());
                     ps.setString(2, artista.getNombre());
@@ -148,6 +156,7 @@ public class Main {
         }
     }
 
+    // El metodo para manejar con Concierto
     public static void ManejarConcierto(Scanner sc, int opcion, Connection con) {
         List<Concierto> listaConciertos = new ArrayList<>();
 
@@ -226,6 +235,7 @@ public class Main {
         }
     }
 
+    // El metodo para manejar con Entrada
     public static void ManejarEntrada(Scanner sc, int opcion, Connection con) {
         List<Entrada> listaEntradas = new ArrayList<>();
 
@@ -247,11 +257,12 @@ public class Main {
                     String fechaCompra = sc.nextLine();
 
                     int idNuevo = 1;
-
+    
                     String sqlContarID = "SELECT COUNT(*) FROM ENTRADA";
                     Statement st = con.createStatement();
                     ResultSet rs = st.executeQuery(sqlContarID);
 
+                    // Un ResultSet para asignar ID
                     if (rs.next()) {
                         idNuevo += rs.getInt(1);
                     }
