@@ -52,4 +52,9 @@ public class Entrada {
     public void setFechaCompra(String fechaCompra) {
         this.fechaCompra = fechaCompra;
     }
+
+    @Override
+    public String toString() {
+        return "ID: " + id + " - Concierto: " + concierto + " - Comprador: " + comprador + " - Cantidad: " + cantidad + " - Fecha Compra: " + fechaCompra;
+    }
 }

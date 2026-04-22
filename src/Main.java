@@ -271,18 +271,7 @@ public class Main {
                     System.out.println("Se ha añadido Entrada!");
                     break;
                 case 2:
-                    System.out.println("Escribe el ID del Concierto que quieres eliminar: ");
-                    int id = sc.nextInt();
-                    sc.nextLine();
-
-                    String sqlParaEliminar = "DELETE FROM ENTRADA WHERE ENTRADA.ID = ?";
-                    Statement st2 = con.createStatement();
-                    st2.executeUpdate(sqlParaEliminar);
-
-                    System.out.println("Se ha eliminado Artista!");
-                    break;
-                case 3:
-                    String sqlParaListar = "SELECT ID, CONCIERTO_ID, COMPRADOR, CANTIDAD, FECHACOMPRA FROM CONCIERTO";
+                    String sqlParaListar = "SELECT ID, CONCIERTO_ID, COMPRADOR, CANTIDAD, FECHACOMPRA FROM ENTRADA";
                     Statement st3 = con.createStatement();
                     ResultSet rs2 = st3.executeQuery(sqlParaListar);
                     while (rs2.next()) {
