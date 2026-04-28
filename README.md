@@ -5,7 +5,7 @@ conciertos ofrecidos por artistas y grupos musicales a lo largo de un año. La
 aplicación debe permitir gestionar información sobre artistas, conciertos y ventas
 de entradas utilizando una base de datos Oracle.**
 
-El programa pide por el teclado los datos de usuario. Podemos acceder al menu atrves de la consola, poniendo numeros de opciones.
+El programa pide por el teclado los datos de usuario. Podemos acceder al menu atraves de la consola, poniendo numeros de opciones.
 
 Luego, el programa lee este numero y con un switch redirige el bucle whule hacia las tres seccions como Artistas, Conciertos o Entradas.
 
