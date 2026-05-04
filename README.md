@@ -19,6 +19,8 @@ y en listar registros se utiliza Resultset, para mostrar los resultados.
 
 ## Como Ejecutar?
 
+Al principio necesitamos tener creado las tablas ARTISTA, CONCIERTO y ENTRADA con su estructura en la base de datos.
+
 1. Por el teclado, nos pide elegir la seccion, utilizando numeros de opciones (1. Artista, 2. Concierto, 3. Entradas, 0. Salir). Elegimos uno de esas opciones.
 2. En la seccion elegida pide otras opciones de manejo (1. Añadir, 2. Eliminar, 3. Listar). Elegimos uno de esas opciones.
 3. Dependiendo de la opcion elegida, seguir las instrucciones que nos dice el programa, introduciendo los datos necesarios.
