@@ -127,6 +127,7 @@ public class Main {
                     int id = sc.nextInt();
                     sc.nextLine();
 
+                    // Una consulta que sirve para eliminar de la tabla Artista el registro con un ID introducido
                     String sqlParaEliminar = "DELETE FROM ARTISTA WHERE ARTISTA.ID = ?";
                     Statement st2 = con.createStatement();
                     st2.executeUpdate(sqlParaEliminar);
@@ -134,9 +135,12 @@ public class Main {
                     System.out.println("Se ha eliminado Artista!");
                     break;
                 case 3:
+                    // Una consulta para sacar los datos de artistas
                     String sqlParaListar = "SELECT ID, NOMBRE, GENEROMUSICAL, PAISORIGEN FROM ARTISTA";
                     Statement st3 = con.createStatement();
                     ResultSet rs2 = st3.executeQuery(sqlParaListar);
+
+                    // Recorremos los datos sacados con un resultset y los mostramos con un bucle for each
                     while (rs2.next()) {
                         lista.add(new Artista(rs2.getInt("ID"), rs2.getString("NOMBRE"), rs2.getString("GENEROMUSICAL"), rs2.getString("PAISORIGEN")));
                     }
@@ -149,6 +153,7 @@ public class Main {
                 default:
                     System.out.println("No existe esta opcion!");
             }
+             // Manejo de los errores
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
         } catch (IllegalArgumentException e) {
@@ -179,6 +184,7 @@ public class Main {
 
                     int idNuevo = 1;
 
+                    // Sacamos la cantidad de conciertos, para calcular nuevoId del nuevo dato
                     String sqlContarID = "SELECT COUNT(*) FROM CONCIERTO";
                     Statement st = con.createStatement();
                     ResultSet rs = st.executeQuery(sqlContarID);
@@ -187,9 +193,11 @@ public class Main {
                         idNuevo += rs.getInt(1);
                     }
 
+                    // Una sql para insertar consierto
                     Concierto concierto = new Concierto(idNuevo, artista, fecha, lugar, precioEntrada);
                     String sqlInsertarConcierto = "INSERT INTO CONCIERTO VALUES (?, ?, ?, ?, ?)";
 
+                    // Un preparedStatement para insertar Concierto
                     PreparedStatement ps = con.prepareStatement(sqlInsertarConcierto);
                     ps.setInt(1, concierto.getId());
                     ps.setInt(2, concierto.getArtista());
@@ -206,6 +214,7 @@ public class Main {
                     int id = sc.nextInt();
                     sc.nextLine();
 
+                    // Una consulta que sirve para eliminar de la tabla Concierto el registro con un ID introducido
                     String sqlParaEliminar = "DELETE FROM CONCIERTO WHERE CONCIERTO.ID = ?";
                     Statement st2 = con.createStatement();
                     st2.executeUpdate(sqlParaEliminar);
@@ -213,9 +222,12 @@ public class Main {
                     System.out.println("Se ha eliminado Artista!");
                     break;
                 case 3:
+                    // Una consulta para sacar los datos de conciertos
                     String sqlParaListar = "SELECT ID, ARTISTA_ID, FECHA, LUGAR, PRECIOENTRADA FROM CONCIERTO";
                     Statement st3 = con.createStatement();
                     ResultSet rs2 = st3.executeQuery(sqlParaListar);
+
+                    // Recorremos los datos sacados con un resultset y los mostramos con un bucle for each
                     while (rs2.next()) {
                         listaConciertos.add(new Concierto(rs2.getInt("ID"), rs2.getInt("ARTISTA_ID"), rs2.getString("FECHA"), rs2.getString("LUGAR"), rs2.getInt("PRECIOENTRADA")));
                     }
@@ -228,6 +240,7 @@ public class Main {
                 default:
                     System.out.println("No existe esta opcion!");
             }
+             // Manejo de los errores
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
         } catch (IllegalArgumentException e) {
@@ -257,7 +270,8 @@ public class Main {
                     String fechaCompra = sc.nextLine();
 
                     int idNuevo = 1;
-    
+
+                    // Sacamos la cantidad de entradas
                     String sqlContarID = "SELECT COUNT(*) FROM ENTRADA";
                     Statement st = con.createStatement();
                     ResultSet rs = st.executeQuery(sqlContarID);
@@ -267,10 +281,11 @@ public class Main {
                         idNuevo += rs.getInt(1);
                     }
 
+                    // Una consulta para insertar nueva Entrada
                     Entrada entrada  = new Entrada(idNuevo, concierto, comprador, cantidad, fechaCompra);
-                    String sqlInsertarConcierto = "INSERT INTO ENTRADA VALUES (?, ?, ?, ?, ?)";
+                    String sqlInsertarEntrada = "INSERT INTO ENTRADA VALUES (?, ?, ?, ?, ?)";
 
-                    PreparedStatement ps = con.prepareStatement(sqlInsertarConcierto);
+                    PreparedStatement ps = con.prepareStatement(sqlInsertarEntrada);
                     ps.setInt(1, entrada.getId());
                     ps.setInt(2, entrada.getConcierto());
                     ps.setString(3, entrada.getComprador());
@@ -282,9 +297,12 @@ public class Main {
                     System.out.println("Se ha añadido Entrada!");
                     break;
                 case 2:
+                    // Una consulta para sacar los datos de entradas
                     String sqlParaListar = "SELECT ID, CONCIERTO_ID, COMPRADOR, CANTIDAD, FECHACOMPRA FROM ENTRADA";
                     Statement st3 = con.createStatement();
                     ResultSet rs2 = st3.executeQuery(sqlParaListar);
+
+                    // Recorremos los datos sacados con un resultset y los mostramos con un bucle for each
                     while (rs2.next()) {
                         listaEntradas.add(new Entrada(rs2.getInt("ID"), rs2.getInt("CONCIERTO_ID"), rs2.getString("COMPRADOR"), rs2.getInt("CANTIDAD"), rs2.getString("FECHACOMPRA")));
                     }
@@ -297,6 +315,7 @@ public class Main {
                 default:
                     System.out.println("No existe esta opcion!");
             }
+            // Manejo de los errores
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
         } catch (IllegalArgumentException e) {
